@@ -6,7 +6,7 @@ const User = {
     resolve(parent, args, { prisma }, info) {
       return prisma.query.credits({
         where: {
-          to: {
+          CreditTo: {
             id: parent.id
           }
         }

@@ -1,7 +1,7 @@
 # source: http://localhost:4466
-# timestamp: Thu Oct 24 2019 16:50:27 GMT+0400 (+04)
+# timestamp: Thu Oct 24 2019 18:46:46 GMT+0400 (+04)
 
-type AggregateCreadit {
+type AggregateCredit {
   count: Int!
 }
 
@@ -14,85 +14,85 @@ type BatchPayload {
   count: Long!
 }
 
-type Creadit implements Node {
+type Credit implements Node {
   id: ID!
   title: String!
-  amont: Float!
-  to: User!
-  by: User!
+  amount: Float!
+  creditTo: User!
+  creaditBy: User!
   updatedAt: DateTime!
   createdAt: DateTime!
 }
 
 """A connection to a list of items."""
-type CreaditConnection {
+type CreditConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [CreaditEdge]!
-  aggregate: AggregateCreadit!
+  edges: [CreditEdge]!
+  aggregate: AggregateCredit!
 }
 
-input CreaditCreateInput {
+input CreditCreateInput {
   id: ID
   title: String!
-  amont: Float!
-  to: UserCreateOneWithoutCreditsInput!
-  by: UserCreateOneInput!
+  amount: Float!
+  creditTo: UserCreateOneWithoutCreditsInput!
+  creaditBy: UserCreateOneInput!
 }
 
-input CreaditCreateManyWithoutToInput {
-  create: [CreaditCreateWithoutToInput!]
-  connect: [CreaditWhereUniqueInput!]
+input CreditCreateManyWithoutCreditToInput {
+  create: [CreditCreateWithoutCreditToInput!]
+  connect: [CreditWhereUniqueInput!]
 }
 
-input CreaditCreateWithoutToInput {
+input CreditCreateWithoutCreditToInput {
   id: ID
   title: String!
-  amont: Float!
-  by: UserCreateOneInput!
+  amount: Float!
+  creaditBy: UserCreateOneInput!
 }
 
 """An edge in a connection."""
-type CreaditEdge {
+type CreditEdge {
   """The item at the end of the edge."""
-  node: Creadit!
+  node: Credit!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum CreaditOrderByInput {
+enum CreditOrderByInput {
   id_ASC
   id_DESC
   title_ASC
   title_DESC
-  amont_ASC
-  amont_DESC
+  amount_ASC
+  amount_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
-type CreaditPreviousValues {
+type CreditPreviousValues {
   id: ID!
   title: String!
-  amont: Float!
+  amount: Float!
   updatedAt: DateTime!
   createdAt: DateTime!
 }
 
-input CreaditScalarWhereInput {
+input CreditScalarWhereInput {
   """Logical AND on all given filters."""
-  AND: [CreaditScalarWhereInput!]
+  AND: [CreditScalarWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [CreaditScalarWhereInput!]
+  OR: [CreditScalarWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [CreaditScalarWhereInput!]
+  NOT: [CreditScalarWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -173,28 +173,28 @@ input CreaditScalarWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
-  amont: Float
+  amount: Float
 
   """All values that are not equal to given value."""
-  amont_not: Float
+  amount_not: Float
 
   """All values that are contained in given list."""
-  amont_in: [Float!]
+  amount_in: [Float!]
 
   """All values that are not contained in given list."""
-  amont_not_in: [Float!]
+  amount_not_in: [Float!]
 
   """All values less than the given value."""
-  amont_lt: Float
+  amount_lt: Float
 
   """All values less than or equal the given value."""
-  amont_lte: Float
+  amount_lte: Float
 
   """All values greater than the given value."""
-  amont_gt: Float
+  amount_gt: Float
 
   """All values greater than or equal the given value."""
-  amont_gte: Float
+  amount_gte: Float
   updatedAt: DateTime
 
   """All values that are not equal to given value."""
@@ -241,22 +241,22 @@ input CreaditScalarWhereInput {
   createdAt_gte: DateTime
 }
 
-type CreaditSubscriptionPayload {
+type CreditSubscriptionPayload {
   mutation: MutationType!
-  node: Creadit
+  node: Credit
   updatedFields: [String!]
-  previousValues: CreaditPreviousValues
+  previousValues: CreditPreviousValues
 }
 
-input CreaditSubscriptionWhereInput {
+input CreditSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [CreaditSubscriptionWhereInput!]
+  AND: [CreditSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [CreaditSubscriptionWhereInput!]
+  OR: [CreditSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [CreaditSubscriptionWhereInput!]
+  NOT: [CreditSubscriptionWhereInput!]
 
   """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
@@ -275,69 +275,69 @@ input CreaditSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: CreaditWhereInput
+  node: CreditWhereInput
 }
 
-input CreaditUpdateInput {
+input CreditUpdateInput {
   title: String
-  amont: Float
-  to: UserUpdateOneRequiredWithoutCreditsInput
-  by: UserUpdateOneRequiredInput
+  amount: Float
+  creditTo: UserUpdateOneRequiredWithoutCreditsInput
+  creaditBy: UserUpdateOneRequiredInput
 }
 
-input CreaditUpdateManyDataInput {
+input CreditUpdateManyDataInput {
   title: String
-  amont: Float
+  amount: Float
 }
 
-input CreaditUpdateManyMutationInput {
+input CreditUpdateManyMutationInput {
   title: String
-  amont: Float
+  amount: Float
 }
 
-input CreaditUpdateManyWithoutToInput {
-  create: [CreaditCreateWithoutToInput!]
-  connect: [CreaditWhereUniqueInput!]
-  set: [CreaditWhereUniqueInput!]
-  disconnect: [CreaditWhereUniqueInput!]
-  delete: [CreaditWhereUniqueInput!]
-  update: [CreaditUpdateWithWhereUniqueWithoutToInput!]
-  updateMany: [CreaditUpdateManyWithWhereNestedInput!]
-  deleteMany: [CreaditScalarWhereInput!]
-  upsert: [CreaditUpsertWithWhereUniqueWithoutToInput!]
+input CreditUpdateManyWithoutCreditToInput {
+  create: [CreditCreateWithoutCreditToInput!]
+  connect: [CreditWhereUniqueInput!]
+  set: [CreditWhereUniqueInput!]
+  disconnect: [CreditWhereUniqueInput!]
+  delete: [CreditWhereUniqueInput!]
+  update: [CreditUpdateWithWhereUniqueWithoutCreditToInput!]
+  updateMany: [CreditUpdateManyWithWhereNestedInput!]
+  deleteMany: [CreditScalarWhereInput!]
+  upsert: [CreditUpsertWithWhereUniqueWithoutCreditToInput!]
 }
 
-input CreaditUpdateManyWithWhereNestedInput {
-  where: CreaditScalarWhereInput!
-  data: CreaditUpdateManyDataInput!
+input CreditUpdateManyWithWhereNestedInput {
+  where: CreditScalarWhereInput!
+  data: CreditUpdateManyDataInput!
 }
 
-input CreaditUpdateWithoutToDataInput {
+input CreditUpdateWithoutCreditToDataInput {
   title: String
-  amont: Float
-  by: UserUpdateOneRequiredInput
+  amount: Float
+  creaditBy: UserUpdateOneRequiredInput
 }
 
-input CreaditUpdateWithWhereUniqueWithoutToInput {
-  where: CreaditWhereUniqueInput!
-  data: CreaditUpdateWithoutToDataInput!
+input CreditUpdateWithWhereUniqueWithoutCreditToInput {
+  where: CreditWhereUniqueInput!
+  data: CreditUpdateWithoutCreditToDataInput!
 }
 
-input CreaditUpsertWithWhereUniqueWithoutToInput {
-  where: CreaditWhereUniqueInput!
-  update: CreaditUpdateWithoutToDataInput!
-  create: CreaditCreateWithoutToInput!
+input CreditUpsertWithWhereUniqueWithoutCreditToInput {
+  where: CreditWhereUniqueInput!
+  update: CreditUpdateWithoutCreditToDataInput!
+  create: CreditCreateWithoutCreditToInput!
 }
 
-input CreaditWhereInput {
+input CreditWhereInput {
   """Logical AND on all given filters."""
-  AND: [CreaditWhereInput!]
+  AND: [CreditWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [CreaditWhereInput!]
+  OR: [CreditWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [CreaditWhereInput!]
+  NOT: [CreditWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -418,28 +418,28 @@ input CreaditWhereInput {
 
   """All values not ending with the given string."""
   title_not_ends_with: String
-  amont: Float
+  amount: Float
 
   """All values that are not equal to given value."""
-  amont_not: Float
+  amount_not: Float
 
   """All values that are contained in given list."""
-  amont_in: [Float!]
+  amount_in: [Float!]
 
   """All values that are not contained in given list."""
-  amont_not_in: [Float!]
+  amount_not_in: [Float!]
 
   """All values less than the given value."""
-  amont_lt: Float
+  amount_lt: Float
 
   """All values less than or equal the given value."""
-  amont_lte: Float
+  amount_lte: Float
 
   """All values greater than the given value."""
-  amont_gt: Float
+  amount_gt: Float
 
   """All values greater than or equal the given value."""
-  amont_gte: Float
+  amount_gte: Float
   updatedAt: DateTime
 
   """All values that are not equal to given value."""
@@ -484,11 +484,11 @@ input CreaditWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
-  to: UserWhereInput
-  by: UserWhereInput
+  creditTo: UserWhereInput
+  creaditBy: UserWhereInput
 }
 
-input CreaditWhereUniqueInput {
+input CreditWhereUniqueInput {
   id: ID
 }
 
@@ -504,17 +504,17 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-  createCreadit(data: CreaditCreateInput!): Creadit!
+  createCredit(data: CreditCreateInput!): Credit!
   createUser(data: UserCreateInput!): User!
-  updateCreadit(data: CreaditUpdateInput!, where: CreaditWhereUniqueInput!): Creadit
+  updateCredit(data: CreditUpdateInput!, where: CreditWhereUniqueInput!): Credit
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  deleteCreadit(where: CreaditWhereUniqueInput!): Creadit
+  deleteCredit(where: CreditWhereUniqueInput!): Credit
   deleteUser(where: UserWhereUniqueInput!): User
-  upsertCreadit(where: CreaditWhereUniqueInput!, create: CreaditCreateInput!, update: CreaditUpdateInput!): Creadit!
+  upsertCredit(where: CreditWhereUniqueInput!, create: CreditCreateInput!, update: CreditUpdateInput!): Credit!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  updateManyCreadits(data: CreaditUpdateManyMutationInput!, where: CreaditWhereInput): BatchPayload!
+  updateManyCredits(data: CreditUpdateManyMutationInput!, where: CreditWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  deleteManyCreadits(where: CreaditWhereInput): BatchPayload!
+  deleteManyCredits(where: CreditWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
@@ -551,11 +551,11 @@ enum PrismaDatabase {
 }
 
 type Query {
-  creadits(where: CreaditWhereInput, orderBy: CreaditOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Creadit]!
+  credits(where: CreditWhereInput, orderBy: CreditOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Credit]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  creadit(where: CreaditWhereUniqueInput!): Creadit
+  credit(where: CreditWhereUniqueInput!): Credit
   user(where: UserWhereUniqueInput!): User
-  creaditsConnection(where: CreaditWhereInput, orderBy: CreaditOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CreaditConnection!
+  creditsConnection(where: CreditWhereInput, orderBy: CreditOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CreditConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
@@ -566,7 +566,7 @@ type Query {
 }
 
 type Subscription {
-  creadit(where: CreaditSubscriptionWhereInput): CreaditSubscriptionPayload
+  credit(where: CreditSubscriptionWhereInput): CreditSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
@@ -576,7 +576,7 @@ type User implements Node {
   email: String!
   password: String!
   rule: String!
-  credits(where: CreaditWhereInput, orderBy: CreaditOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Creadit!]
+  credits(where: CreditWhereInput, orderBy: CreditOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Credit!]
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -597,7 +597,7 @@ input UserCreateInput {
   email: String!
   password: String!
   rule: String!
-  credits: CreaditCreateManyWithoutToInput
+  credits: CreditCreateManyWithoutCreditToInput
 }
 
 input UserCreateOneInput {
@@ -696,7 +696,7 @@ input UserUpdateDataInput {
   email: String
   password: String
   rule: String
-  credits: CreaditUpdateManyWithoutToInput
+  credits: CreditUpdateManyWithoutCreditToInput
 }
 
 input UserUpdateInput {
@@ -704,7 +704,7 @@ input UserUpdateInput {
   email: String
   password: String
   rule: String
-  credits: CreaditUpdateManyWithoutToInput
+  credits: CreditUpdateManyWithoutCreditToInput
 }
 
 input UserUpdateManyMutationInput {
@@ -998,9 +998,9 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
-  credits_every: CreaditWhereInput
-  credits_some: CreaditWhereInput
-  credits_none: CreaditWhereInput
+  credits_every: CreditWhereInput
+  credits_some: CreditWhereInput
+  credits_none: CreditWhereInput
 }
 
 input UserWhereUniqueInput {

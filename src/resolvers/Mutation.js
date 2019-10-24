@@ -70,12 +70,12 @@ const Mutation = {
       data: {
         title: args.data.title,
         amount: args.data.amount,
-        to: {
+        creaditTo: {
           connect: {
-            id: args.data.to
+            id: args.data.creaditTo
           }
         },
-        by: {
+        creaditBy: {
           connect: {
             id: userId
           }
