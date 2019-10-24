@@ -1,0 +1,91 @@
+type Query {
+    users(query: String, first: Int, skip: Int, after: String, orderBy: UserOrderByInput): [User!]!
+    credits(query: String, first: Int, skip: Int, after: String, orderBy: CreditOrderByInput): [Creadit!]!
+    userCredits(query: String, first: Int, skip: Int, after: String, orderBy: CreditOrderByInput): [Creadit!]!
+    me: User!
+    credit(id: ID!): Creadit!
+}
+
+type Mutation {
+    createUser(data: CreateUserInput!): AuthPayload!
+    login(data: LoginUserInput!): AuthPayload!
+    deleteUser: User!
+    updateUser(data: UpdateUserInput!): User!
+    createCredit(data: CreateCreditInput!): Credit!
+    deleteCredit(id: ID!): Credit!
+    updateCredit(id: ID!, data: UpdateCreditInput!): Credit!
+}
+
+type Subscription {
+    credit: CreditSubscriptionPayload!
+}
+
+type AuthPayload {
+    token: String!
+    user: User!
+}
+
+input CreateUserInput {
+    name: String!
+    email: String!
+    password: String!
+    rule: String!
+}
+
+input LoginUserInput {
+    email: String!
+    password: String!
+}
+
+input UpdateUserInput {
+    name: String
+    email: String
+    password: String
+    rule: String
+}
+
+input CreateCreditInput {
+    title: String!
+    amount: String!
+    to: User!
+    by: User!
+}
+
+input UpdateCreditInput {
+    title: String
+    amount: String
+    to: User
+    by: User
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+    rule: String!
+    credits: [Credit!]
+    updatedAt: String!
+    createdAt: String!
+}
+
+type Credit {
+    id: ID!
+    title: String!
+    amount: Float!
+    to: User!
+    by: User!
+    updatedAt: String!
+    createdAt: String!
+}
+
+enum MutationType {
+    CREATED
+    UPDATED
+    DELETED
+}
+
+type CreditSubscriptionPayload {
+    mutation: MutationType!
+    node: Credit
+}

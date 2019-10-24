@@ -1,0 +1,20 @@
+type User {
+  id: ID! @id @unique
+  name: String!
+  email: String! @unique
+  password: String!
+  rule: String!
+  credits: [Credit!] @relation(name: "CreditToUser", onDelete: CASCADE)
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}
+
+type Credit {
+  id: ID! @id @unique
+  title: String!
+  amount: Float!
+  to: User! @relation(name: "CreditToUser", onDelete: SET_NULL)
+  by: User! @relation(name: "UserToCredit", onDelete: SET_NULL)
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}
