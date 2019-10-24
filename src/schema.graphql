@@ -1,9 +1,11 @@
+# import UserOrderByInput, CreditOrderByInput, CreditOrderByInput from './generated/prisma.graphql'
+
 type Query {
     users(query: String, first: Int, skip: Int, after: String, orderBy: UserOrderByInput): [User!]!
-    credits(query: String, first: Int, skip: Int, after: String, orderBy: CreditOrderByInput): [Creadit!]!
-    userCredits(query: String, first: Int, skip: Int, after: String, orderBy: CreditOrderByInput): [Creadit!]!
+    credits(query: String, first: Int, skip: Int, after: String, orderBy: CreditOrderByInput): [Credit!]!
+    userCredits(query: String, first: Int, skip: Int, after: String, orderBy: CreditOrderByInput): [Credit!]!
     me: User!
-    credit(id: ID!): Creadit!
+    credit(id: ID!): Credit!
 }
 
 type Mutation {
@@ -47,15 +49,15 @@ input UpdateUserInput {
 input CreateCreditInput {
     title: String!
     amount: String!
-    to: User!
-    by: User!
+    creditTo: String!
+    creditBy: String!
 }
 
 input UpdateCreditInput {
     title: String
     amount: String
-    to: User
-    by: User
+    creditTo: String
+    creditBy: String
 }
 
 type User {
@@ -73,8 +75,8 @@ type Credit {
     id: ID!
     title: String!
     amount: Float!
-    to: User!
-    by: User!
+    creditTo: User!
+    creditBy: User!
     updatedAt: String!
     createdAt: String!
 }
