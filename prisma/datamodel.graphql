@@ -3,7 +3,8 @@ type User {
   name: String!
   email: String! @unique
   password: String!
-  rule: String!
+  rule: String! @default(value: "user")
+  department: Department @relation(link: INLINE)
   credits: [Credit!] @relation(name: "CreditToUser", onDelete: CASCADE)
   updatedAt: DateTime! @updatedAt
   createdAt: DateTime! @createdAt
@@ -14,7 +15,14 @@ type Credit {
   title: String!
   amount: Float!
   creditTo: User! @relation(name: "CreditToUser", onDelete: SET_NULL)
-  creaditBy: User! @relation(name: "UserToCredit", onDelete: SET_NULL)
+  creditBy: User! @relation(name: "UserToCredit", onDelete: SET_NULL)
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+}
+
+type Department {
+  id: ID! @id @unique
+  name: String!
   updatedAt: DateTime! @updatedAt
   createdAt: DateTime! @createdAt
 }

@@ -66,6 +66,9 @@ type User {
     email: String!
     password: String!
     rule: String!
+    balance: Float!
+    department: Department
+    lastTransaction: Credit
     credits: [Credit!]
     updatedAt: String!
     createdAt: String!
@@ -77,6 +80,13 @@ type Credit {
     amount: Float!
     creditTo: User!
     creditBy: User!
+    updatedAt: String!
+    createdAt: String!
+}
+
+type Department {
+    id: ID!
+    name: String!
     updatedAt: String!
     createdAt: String!
 }

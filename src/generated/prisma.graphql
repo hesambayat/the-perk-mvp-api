@@ -1,7 +1,11 @@
 # source: http://localhost:4466
-# timestamp: Thu Oct 24 2019 18:46:46 GMT+0400 (+04)
+# timestamp: Tue Oct 29 2019 12:41:13 GMT+0400 (+04)
 
 type AggregateCredit {
+  count: Int!
+}
+
+type AggregateDepartment {
   count: Int!
 }
 
@@ -19,7 +23,7 @@ type Credit implements Node {
   title: String!
   amount: Float!
   creditTo: User!
-  creaditBy: User!
+  creditBy: User!
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -39,7 +43,7 @@ input CreditCreateInput {
   title: String!
   amount: Float!
   creditTo: UserCreateOneWithoutCreditsInput!
-  creaditBy: UserCreateOneInput!
+  creditBy: UserCreateOneInput!
 }
 
 input CreditCreateManyWithoutCreditToInput {
@@ -51,7 +55,7 @@ input CreditCreateWithoutCreditToInput {
   id: ID
   title: String!
   amount: Float!
-  creaditBy: UserCreateOneInput!
+  creditBy: UserCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -282,7 +286,7 @@ input CreditUpdateInput {
   title: String
   amount: Float
   creditTo: UserUpdateOneRequiredWithoutCreditsInput
-  creaditBy: UserUpdateOneRequiredInput
+  creditBy: UserUpdateOneRequiredInput
 }
 
 input CreditUpdateManyDataInput {
@@ -315,7 +319,7 @@ input CreditUpdateManyWithWhereNestedInput {
 input CreditUpdateWithoutCreditToDataInput {
   title: String
   amount: Float
-  creaditBy: UserUpdateOneRequiredInput
+  creditBy: UserUpdateOneRequiredInput
 }
 
 input CreditUpdateWithWhereUniqueWithoutCreditToInput {
@@ -485,7 +489,7 @@ input CreditWhereInput {
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
   creditTo: UserWhereInput
-  creaditBy: UserWhereInput
+  creditBy: UserWhereInput
 }
 
 input CreditWhereUniqueInput {
@@ -493,6 +497,262 @@ input CreditWhereUniqueInput {
 }
 
 scalar DateTime
+
+type Department implements Node {
+  id: ID!
+  name: String!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
+
+"""A connection to a list of items."""
+type DepartmentConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [DepartmentEdge]!
+  aggregate: AggregateDepartment!
+}
+
+input DepartmentCreateInput {
+  id: ID
+  name: String!
+}
+
+input DepartmentCreateOneInput {
+  create: DepartmentCreateInput
+  connect: DepartmentWhereUniqueInput
+}
+
+"""An edge in a connection."""
+type DepartmentEdge {
+  """The item at the end of the edge."""
+  node: Department!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum DepartmentOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type DepartmentPreviousValues {
+  id: ID!
+  name: String!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+}
+
+type DepartmentSubscriptionPayload {
+  mutation: MutationType!
+  node: Department
+  updatedFields: [String!]
+  previousValues: DepartmentPreviousValues
+}
+
+input DepartmentSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DepartmentSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DepartmentSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DepartmentSubscriptionWhereInput!]
+
+  """The subscription event gets dispatched when it's listed in mutation_in"""
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: DepartmentWhereInput
+}
+
+input DepartmentUpdateDataInput {
+  name: String
+}
+
+input DepartmentUpdateInput {
+  name: String
+}
+
+input DepartmentUpdateManyMutationInput {
+  name: String
+}
+
+input DepartmentUpdateOneInput {
+  create: DepartmentCreateInput
+  connect: DepartmentWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: DepartmentUpdateDataInput
+  upsert: DepartmentUpsertNestedInput
+}
+
+input DepartmentUpsertNestedInput {
+  update: DepartmentUpdateDataInput!
+  create: DepartmentCreateInput!
+}
+
+input DepartmentWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DepartmentWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DepartmentWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DepartmentWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+}
+
+input DepartmentWhereUniqueInput {
+  id: ID
+}
 
 """Raw JSON value"""
 scalar Json
@@ -505,16 +765,22 @@ scalar Long
 
 type Mutation {
   createCredit(data: CreditCreateInput!): Credit!
+  createDepartment(data: DepartmentCreateInput!): Department!
   createUser(data: UserCreateInput!): User!
   updateCredit(data: CreditUpdateInput!, where: CreditWhereUniqueInput!): Credit
+  updateDepartment(data: DepartmentUpdateInput!, where: DepartmentWhereUniqueInput!): Department
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   deleteCredit(where: CreditWhereUniqueInput!): Credit
+  deleteDepartment(where: DepartmentWhereUniqueInput!): Department
   deleteUser(where: UserWhereUniqueInput!): User
   upsertCredit(where: CreditWhereUniqueInput!, create: CreditCreateInput!, update: CreditUpdateInput!): Credit!
+  upsertDepartment(where: DepartmentWhereUniqueInput!, create: DepartmentCreateInput!, update: DepartmentUpdateInput!): Department!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   updateManyCredits(data: CreditUpdateManyMutationInput!, where: CreditWhereInput): BatchPayload!
+  updateManyDepartments(data: DepartmentUpdateManyMutationInput!, where: DepartmentWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   deleteManyCredits(where: CreditWhereInput): BatchPayload!
+  deleteManyDepartments(where: DepartmentWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
@@ -552,10 +818,13 @@ enum PrismaDatabase {
 
 type Query {
   credits(where: CreditWhereInput, orderBy: CreditOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Credit]!
+  departments(where: DepartmentWhereInput, orderBy: DepartmentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Department]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   credit(where: CreditWhereUniqueInput!): Credit
+  department(where: DepartmentWhereUniqueInput!): Department
   user(where: UserWhereUniqueInput!): User
   creditsConnection(where: CreditWhereInput, orderBy: CreditOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CreditConnection!
+  departmentsConnection(where: DepartmentWhereInput, orderBy: DepartmentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DepartmentConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
@@ -567,6 +836,7 @@ type Query {
 
 type Subscription {
   credit(where: CreditSubscriptionWhereInput): CreditSubscriptionPayload
+  department(where: DepartmentSubscriptionWhereInput): DepartmentSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
@@ -576,6 +846,7 @@ type User implements Node {
   email: String!
   password: String!
   rule: String!
+  department: Department
   credits(where: CreditWhereInput, orderBy: CreditOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Credit!]
   updatedAt: DateTime!
   createdAt: DateTime!
@@ -596,7 +867,8 @@ input UserCreateInput {
   name: String!
   email: String!
   password: String!
-  rule: String!
+  rule: String
+  department: DepartmentCreateOneInput
   credits: CreditCreateManyWithoutCreditToInput
 }
 
@@ -615,7 +887,8 @@ input UserCreateWithoutCreditsInput {
   name: String!
   email: String!
   password: String!
-  rule: String!
+  rule: String
+  department: DepartmentCreateOneInput
 }
 
 """An edge in a connection."""
@@ -696,6 +969,7 @@ input UserUpdateDataInput {
   email: String
   password: String
   rule: String
+  department: DepartmentUpdateOneInput
   credits: CreditUpdateManyWithoutCreditToInput
 }
 
@@ -704,6 +978,7 @@ input UserUpdateInput {
   email: String
   password: String
   rule: String
+  department: DepartmentUpdateOneInput
   credits: CreditUpdateManyWithoutCreditToInput
 }
 
@@ -733,6 +1008,7 @@ input UserUpdateWithoutCreditsDataInput {
   email: String
   password: String
   rule: String
+  department: DepartmentUpdateOneInput
 }
 
 input UserUpsertNestedInput {
@@ -998,6 +1274,7 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  department: DepartmentWhereInput
   credits_every: CreditWhereInput
   credits_some: CreditWhereInput
   credits_none: CreditWhereInput
