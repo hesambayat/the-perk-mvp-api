@@ -32,7 +32,7 @@ const Mutation = {
     const isMatch = await bcrypt.compare(args.data.password, user.password)
 
     if (!isMatch) {
-      throw new Error('Unable to login')
+      throw new Error('Email or password is wrong')
     }
 
     return {
@@ -70,12 +70,12 @@ const Mutation = {
       data: {
         title: args.data.title,
         amount: args.data.amount,
-        creaditTo: {
+        creditTo: {
           connect: {
-            id: args.data.creaditTo
+            id: args.data.creditTo
           }
         },
-        creaditBy: {
+        creditBy: {
           connect: {
             id: userId
           }
