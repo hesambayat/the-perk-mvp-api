@@ -23,6 +23,24 @@ const Query = {
 
     return prisma.query.users(opArgs, info)
   },
+  departments(parent, args, { prisma }, info) {
+    const opArgs = {
+      first: args.first,
+      skip: args.skip,
+      after: args.after,
+      orderBy: args.orderBy,
+    }
+
+    if (args.query) {
+      opArgs.where = {
+        OR: [{
+          title_contains: args.query
+        }]
+      }
+    }
+
+    return prisma.query.departments(opArgs, info)
+  },
   credits(parent, args, { prisma }, info) {
     const opArgs = {
       first: args.first,

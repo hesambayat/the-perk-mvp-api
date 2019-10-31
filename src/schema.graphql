@@ -1,7 +1,8 @@
-# import UserOrderByInput, CreditOrderByInput, CreditOrderByInput from './generated/prisma.graphql'
+# import UserOrderByInput, CreditOrderByInput, CreditOrderByInput, DepartmentOrderByInput from './generated/prisma.graphql'
 
 type Query {
     users(query: String, first: Int, skip: Int, after: String, orderBy: UserOrderByInput): [User!]!
+    departments(query: String, first: Int, skip: Int, after: String, orderBy: DepartmentOrderByInput): [Department!]!
     credits(query: String, first: Int, skip: Int, after: String, orderBy: CreditOrderByInput): [Credit!]!
     userCredits(query: String, first: Int, skip: Int, after: String, orderBy: CreditOrderByInput): [Credit!]!
     me: User!
