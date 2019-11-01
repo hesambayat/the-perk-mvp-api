@@ -59,15 +59,20 @@ input LoginUserInput {
 input CreateCreditInput {
     title: String!
     amount: String!
-    creditTo: String!
-    creditBy: String!
+    creditTo: CreditCreateOneInput!
+    creditBy: CreditCreateOneInput
 }
 
 input UpdateCreditInput {
     title: String
     amount: String
-    creditTo: String
-    creditBy: String
+    creditTo: CreditCreateOneInput
+    creditBy: CreditCreateOneInput
+}
+
+input CreditCreateOneInput {
+  create: CreditCreateInput
+  connect: CreditWhereUniqueInput
 }
 
 type User {

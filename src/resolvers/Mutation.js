@@ -21,6 +21,10 @@ const Mutation = {
       throw new Error('Enter a valid email')
     }
 
+    if (!args.data.department.connect.id) {
+      throw new Error('Department is required')
+    }
+
     const user = await prisma.mutation.createUser({
       data: {
         ...args.data,
@@ -82,15 +86,25 @@ const Mutation = {
   createCredit(parent, args, { prisma, request }, info) {
     const userId = getUserId(request)
 
+    const amount = Number(args.data.amount)
+    if (!amount || isNaN(amount)) {
+      throw new Error('Amount is required')
+    }
+
+    const title = String(args.data.title).trim()
+    if (!title) {
+      throw new Error('Title is required')
+    }
+
+    if (!args.data.creditTo.connect.id) {
+      throw new Error('Employee is required')
+    }
+
     return prisma.mutation.createCredit({
       data: {
-        title: args.data.title,
-        amount: args.data.amount,
-        creditTo: {
-          connect: {
-            id: args.data.creditTo
-          }
-        },
+        ...args.data,
+        amount,
+        title,
         creditBy: {
           connect: {
             id: userId
