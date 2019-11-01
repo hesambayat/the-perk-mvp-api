@@ -18,13 +18,13 @@
     "@babel/core": "^7.6.4",
     "@babel/node": "^7.6.3",
     "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
-    "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.6.3",
     "env-cmd": "^10.0.1",
     "graphql-cli": "^3.0.14",
     "nodemon": "^1.19.4"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.6.0",
     "bcryptjs": "^2.4.3",
     "graphql-yoga": "^1.18.3",
     "jsonwebtoken": "^8.5.1",
